@@ -14,6 +14,25 @@ body {
   background-color: #87CEEB; /* Sky blue background */
   position: relative;
   min-height: 100vh;
+  -webkit-user-select: none; /* Disable text selection */
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Disable Zooming */
+body {
+  touch-action: manipulation;
+}
+
+html {
+  -ms-touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (max-width: 480px) {
+  body {
+    -webkit-text-size-adjust: none;
+  }
 }
 
 /* Background Container for Pixel Art Clouds */
@@ -76,7 +95,7 @@ header {
 
 #live-time {
   font-size: 1.2em;
-  color: #333;
+  color: #0000FF; /* Changed color to blue */
   font-weight: bold;
 }
 
@@ -173,7 +192,7 @@ main {
 /* Huiswerk Button Section */
 .huiswerk-section {
   text-align: center;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .huiswerk-section p {
@@ -220,7 +239,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .day-rating p {
@@ -314,6 +333,12 @@ main {
   gap: 10px;
 }
 
+.navigation-buttons button,
+.navigation-buttons span {
+  display: flex;
+  align-items: center;
+}
+
 .nav-button {
   background-color: #d3eaff;
   border: none;
@@ -335,6 +360,18 @@ main {
   font-size: 1em;
   color: #333;
   font-weight: bold;
+}
+
+/* Align arrows and category name */
+.navigation-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button,
+#category-name {
+  margin: 0 5px;
 }
 
 /* Dragging Clone Styles */

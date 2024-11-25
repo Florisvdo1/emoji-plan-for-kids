@@ -103,6 +103,9 @@ function handleDragStart(e) {
     // Position the clone at the touch point
     const touch = e.touches[0];
     updateDraggedEmojiPosition(touch);
+
+    // Initialize auto-scrolling
+    initAutoScroll();
   } catch (error) {
     logError('handleDragStart', 'Failed during drag start.', { error });
   }
@@ -132,6 +135,9 @@ function handleDragMove(e) {
         currentDroppable.classList.add('highlight');
       }
     }
+
+    // Auto-scroll when near the edge
+    autoScroll(touch.clientY);
   } catch (error) {
     logError('handleDragMove', 'Failed during drag move.', { error });
   }
@@ -154,6 +160,9 @@ function handleDragEnd(e) {
 
     draggedEmoji = null;
     currentDroppable = null;
+
+    // Stop auto-scrolling
+    stopAutoScroll();
   } catch (error) {
     logError('handleDragEnd', 'Failed during drag end.', { error });
   }
@@ -171,6 +180,9 @@ function handleMouseDown(e) {
 
     // Position the clone at the mouse point
     updateDraggedEmojiPosition(e);
+
+    // Initialize auto-scrolling
+    initAutoScroll();
 
     // Mouse move and up handlers
     document.addEventListener('mousemove', handleMouseMove, false);
@@ -202,6 +214,9 @@ function handleMouseMove(e) {
         currentDroppable.classList.add('highlight');
       }
     }
+
+    // Auto-scroll when near the edge
+    autoScroll(e.clientY);
   } catch (error) {
     logError('handleMouseMove', 'Failed during mouse move.', { error });
   }
@@ -224,6 +239,9 @@ function handleMouseUp(e) {
 
     draggedEmoji = null;
     currentDroppable = null;
+
+    // Stop auto-scrolling
+    stopAutoScroll();
 
     document.removeEventListener('mousemove', handleMouseMove, false);
     document.removeEventListener('mouseup', handleMouseUp, false);
@@ -248,6 +266,38 @@ function updateDraggedEmojiPosition(event) {
   } catch (error) {
     logError('updateDraggedEmojiPosition', 'Failed to update dragged emoji position.', { error });
   }
+}
+
+// Auto-scroll variables
+let autoScrollInterval = null;
+const scrollThreshold = 50; // Distance from edge in pixels
+const scrollSpeed = 10; // Pixels per interval
+
+// Initialize auto-scrolling
+function initAutoScroll() {
+  if (autoScrollInterval) return;
+  autoScrollInterval = setInterval(() => {}, 20); // Placeholder, actual scrolling happens in autoScroll()
+}
+
+// Auto-scroll function
+function autoScroll(pointerY) {
+  const viewportHeight = window.innerHeight;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const maxScroll = document.documentElement.scrollHeight - viewportHeight;
+
+  if (pointerY < scrollThreshold && scrollTop > 0) {
+    // Scroll up
+    window.scrollBy(0, -scrollSpeed);
+  } else if (pointerY > viewportHeight - scrollThreshold && scrollTop < maxScroll) {
+    // Scroll down
+    window.scrollBy(0, scrollSpeed);
+  }
+}
+
+// Stop auto-scrolling
+function stopAutoScroll() {
+  clearInterval(autoScrollInterval);
+  autoScrollInterval = null;
 }
 
 // Huiswerk Button Toggle Functionality
