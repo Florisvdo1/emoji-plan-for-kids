@@ -369,6 +369,73 @@ ratingButtons.forEach(button => {
   });
 });
 
+// Header Logo Flip Animation
+window.addEventListener('load', () => {
+  try {
+    const headerLogo = document.getElementById('header-logo');
+    headerLogo.classList.add('flip-animation');
+    // Remove the animation class after it completes to prevent looping
+    headerLogo.addEventListener('animationend', () => {
+      headerLogo.classList.remove('flip-animation');
+    });
+  } catch (error) {
+    logError('headerLogoAnimation', 'Failed to animate header logo.', { error });
+  }
+});
+
+// How-To Overlay Screen Functionality
+const howToOverlay = document.getElementById('how-to-overlay');
+const howToSlides = document.querySelectorAll('.how-to-slide');
+const howToDots = document.querySelectorAll('.how-to-dots .dot');
+const howToCloseButton = document.getElementById('how-to-close');
+
+let currentSlideIndex = 0;
+
+// Show the initial slide
+showSlide(currentSlideIndex);
+
+// Swipe event listeners
+let startX = 0;
+howToOverlay.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+}, false);
+
+howToOverlay.addEventListener('touchend', e => {
+  const endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) {
+    // Swiped left
+    nextSlide();
+  } else if (endX - startX > 50) {
+    // Swiped right
+    prevSlide();
+  }
+}, false);
+
+// Show the specified slide
+function showSlide(index) {
+  howToSlides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+    howToDots[i].classList.toggle('active', i === index);
+  });
+}
+
+// Next slide
+function nextSlide() {
+  currentSlideIndex = (currentSlideIndex + 1) % howToSlides.length;
+  showSlide(currentSlideIndex);
+}
+
+// Previous slide
+function prevSlide() {
+  currentSlideIndex = (currentSlideIndex - 1 + howToSlides.length) % howToSlides.length;
+  showSlide(currentSlideIndex);
+}
+
+// Close the How-To Overlay
+howToCloseButton.addEventListener('click', () => {
+  howToOverlay.style.display = 'none';
+});
+
 // Initialize the application
 function init() {
   try {

@@ -10,8 +10,50 @@
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Background Container for Pixel Art Clouds -->
-  <div class="background-container"></div>
+  <!-- Background Container for Cloud Animation -->
+  <div class="background-container">
+    <!-- Cloud Rows -->
+    <div class="cloud-row row1">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud1">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud2">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud3">
+    </div>
+    <div class="cloud-row row2">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud4">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud5">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud6">
+    </div>
+    <div class="cloud-row row3">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud7">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud8">
+      <img src="images/cloud.svg" alt="Cloud" class="cloud cloud9">
+    </div>
+  </div>
+
+  <!-- How-To Overlay Screen -->
+  <div id="how-to-overlay" class="how-to-overlay">
+    <div class="how-to-content">
+      <div class="how-to-slide active">
+        <h2>Hoe gebruik je de Emoji Planner?</h2>
+        <p>Sleep en zet emoji's uit het Emoji Deck in de plaatsvakken van Ochtend, Middag en Avond.</p>
+      </div>
+      <div class="how-to-slide">
+        <h2>Geef je dag een Emoji</h2>
+        <p>Kies een emoji die bij je dag past door erop te tikken.</p>
+      </div>
+      <div class="how-to-slide">
+        <h2>Huiswerk Button</h2>
+        <p>Heb je je huiswerk af? Tik op de Huiswerk knop om het af te vinken.</p>
+      </div>
+      <button id="how-to-close" class="how-to-close-button">Klaar</button>
+      <!-- Navigation Dots -->
+      <div class="how-to-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
 
   <!-- Header Section -->
   <header>
@@ -22,7 +64,7 @@
       </div>
       <!-- Center: Logo -->
       <div class="header-center">
-        <img src="images/logo.png" alt="Emoji Dagplanner Logo" class="logo">
+        <img src="images/logo.svg" alt="Emoji Dagplanner Logo" class="logo" id="header-logo">
       </div>
       <!-- Right Side: Reset Button -->
       <div class="header-right">
@@ -116,9 +158,9 @@
         <div id="emoji-grid" class="emoji-grid"></div>
         <!-- Navigation Buttons for Categories -->
         <div class="navigation-buttons">
-          <button id="prev-category" class="nav-button" aria-label="Previous Category">◀️</button>
+          <button id="prev-category" class="nav-button" aria-label="Vorige categorie">◀️</button>
           <span id="category-name">Activiteiten</span>
-          <button id="next-category" class="nav-button" aria-label="Next Category">▶️</button>
+          <button id="next-category" class="nav-button" aria-label="Volgende categorie">▶️</button>
         </div>
       </div>
     </div>
